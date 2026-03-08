@@ -1,37 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ultraviolet Proxy</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSphere - Roblox Launcher</title>
     <style>
-        body { background: #000; color: #fff; font-family: Arial; padding: 50px; text-align: center; }
-        input, button { padding: 10px; margin: 5px; }
-        .bookmark { display: inline-block; padding: 10px; margin: 5px; background: #333; cursor: pointer; }
+        body {
+            background-color: #0a0f1e;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            text-align: center;
+            background: linear-gradient(145deg, #1a1f30, #0e1322);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #4a9eff;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(74, 158, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            color: #8a9bb5;
+            margin-bottom: 35px;
+            font-size: 1.1em;
+            border-bottom: 1px solid #2a3145;
+            padding-bottom: 20px;
+        }
+        .launch-btn {
+            background: linear-gradient(45deg, #ff4a6e, #ff8a4a);
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 10px 0 #a02a3a, 0 15px 30px rgba(255, 75, 110, 0.5);
+            transition: all 0.1s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 20px 0 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .launch-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 13px 0 #a02a3a, 0 20px 40px rgba(255, 75, 110, 0.6);
+        }
+        .launch-btn:active {
+            transform: translateY(8px);
+            box-shadow: 0 5px 0 #a02a3a, 0 15px 30px rgba(255, 75, 110, 0.5);
+        }
+        .info-box {
+            background: #1e2538;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: left;
+            border-left: 5px solid #4a9eff;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .info-box h3 {
+            color: #ffd966;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        .info-box p {
+            color: #b0c4de;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .info-box .note {
+            color: #ff9f4a;
+            font-weight: bold;
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px dashed #ff9f4a;
+        }
+        .footer {
+            color: #5f6f8a;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
-    <h1>Ultraviolet Proxy</h1>
-    <input id="url" size="50" placeholder="Enter URL (e.g., google.com)">
-    <button onclick="go()">Go</button>
-    
-    <div style="margin-top: 20px;">
-        <div class="bookmark" onclick="loadSite('now.gg')">🎮 Roblox</div>
-        <div class="bookmark" onclick="loadSite('youtube.com')">📺 YouTube</div>
-        <div class="bookmark" onclick="loadSite('spotify.com')">🎵 Spotify</div>
+    <div class="container">
+        <h1>⚡ LEARNSPHERE ⚡</h1>
+        <div class="subtitle">interactive learning portal</div>
+        
+        <!-- Main Launch Button -->
+        <button class="launch-btn" id="launchBtn">🚀 LAUNCH ROBLOX</button>
+        
+        <div class="info-box">
+            <h3>⚙️ LAUNCHER SETTINGS</h3>
+            <p><strong>Screen Resolution & Frame Rate:</strong> Your preferences will be applied when you launch.</p>
+            <p><span style="color:#6eff9e;">✓ Lower settings = less lag</span><br>
+               <span style="color:#ff9f4a;">⚠️ More FPS = smoother but more demanding</span></p>
+            <div class="note">
+                ⚠️ NOTE: You cannot change these settings after launch until now.gg brings back the option.
+            </div>
+        </div>
+        
+        <!-- Hidden iframe that will be updated -->
+        <iframe id="gameFrame" style="display: none;"></iframe>
+        
+        <div class="footer">educational purposes only • learnsphere v1.0</div>
     </div>
-    
-    <iframe id="frame" style="width:100%; height:600px; margin-top:20px; border:1px solid #333;"></iframe>
 
     <script>
-    function go() {
-        let site = document.getElementById('url').value;
-        if (!site.startsWith('http')) site = 'https://' + site;
-        document.getElementById('frame').src = '/uv/service/' + site;
-    }
-    
-    function loadSite(site) {
-        document.getElementById('url').value = site;
-        go();
-    }
+        const launchBtn = document.getElementById('launchBtn');
+        const gameFrame = document.getElementById('gameFrame');
+        
+        // The target URL
+        const targetUrl = 'https://nowgg.fun/apps/a/19900/b.html';
+        
+        launchBtn.addEventListener('click', function() {
+            // Show a loading indicator on the button temporarily
+            const originalText = launchBtn.innerHTML;
+            launchBtn.innerHTML = '🌀 LOADING...';
+            launchBtn.disabled = true;
+            
+            // Set the iframe src to load the page
+            gameFrame.src = targetUrl;
+            
+            // Wait a moment, then redirect the current window to the URL
+            // (if you want it to load in the same window instead of iframe)
+            setTimeout(function() {
+                window.location.href = targetUrl;
+                // If you prefer to keep it in the iframe, comment the line above
+                // and uncomment the lines below:
+                /*
+                launchBtn.innerHTML = '✅ LAUNCHED';
+                setTimeout(() => {
+                    launchBtn.innerHTML = originalText;
+                    launchBtn.disabled = false;
+                }, 2000);
+                */
+            }, 500);
+        });
     </script>
 </body>
 </html>
