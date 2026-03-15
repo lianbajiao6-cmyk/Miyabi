@@ -7,6 +7,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100vh;
+	color: #fff;
+	align-items: center;
 }
 
 .fa-magnifying-glass {
@@ -18,6 +20,98 @@ body {
 	justify-content: center;
 }
 
+.app-shell {
+	width: min(100%, 960px);
+	margin: 12px;
+	background: #171b2e;
+	border: 1px solid #2f3b64;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.tab-row {
+	display: flex;
+	gap: 6px;
+	margin-bottom: 10px;
+}
+
+.tab-button {
+	background: #2a3556;
+	border: 1px solid #44557b;
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.tab-button.active {
+	background: #5f8bff;
+	border-color: #5f8bff;
+}
+
+.panel {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
+
+.form-row {
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-bottom: 10px;
+}
+
+#uv-address {
+	background: #171b30;
+	font-family: inherit;
+	padding: 10px 14px;
+	height: 44px;
+	border: 1px solid #41527a;
+	color: #fff;
+	border-radius: 6px;
+	outline: none;
+	width: calc(100% - 110px);
+	max-width: 640px;
+}
+
+.search-btn {
+	padding: 10px 14px;
+	border-radius: 6px;
+	border: none;
+	background: #4f79f8;
+	color: #fff;
+	cursor: pointer;
+}
+
+#uv-frame {
+	border: 1px solid #44557a;
+	width: 100%;
+	height: 500px;
+	border-radius: 8px;
+	background-color: #111;
+}
+
+.setting-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 12px;
+	gap: 10px;
+}
+
+.setting-note {
+	margin-top: 8px;
+	color: #d8e2ff;
+	font-size: 13px;
+}
+
+.desc p {
+	width: auto;
+	color: rgba(253, 253, 253, 0.9);
+}
+
 .header-center {
 	align-items: center;
 	flex-direction: column;
@@ -26,16 +120,6 @@ body {
 
 .left-margin {
 	margin: 0px 16px;
-}
-
-#uv-frame {
-	border: none;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100vw;
-	height: 100vh;
-	background-color: #111;
 }
 
 #uv-error {
