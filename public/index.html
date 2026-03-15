@@ -9,7 +9,7 @@
 		<title>Ultraviolet | Sophisticated Web Proxy</title>
 		<meta
 			name="description"
-			content="Ultraviolet is a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers. Unblock sites today!"
+			content="Ultraviolet web app"
 		/>
 		<meta
 			name="keywords"
@@ -72,51 +72,65 @@
 			<h1>Ultraviolet | TN</h1>
 		</div>
 		<div class="flex-center desc left-margin">
-			<p>
-				Ultraviolet is highly sophisticated proxy used for evading internet
-				censorship.
-			</p>
+			<p>Ultraviolet</p>
 		</div>
 
-		<form id="uv-form" class="flex-center">
-			<input
-				id="uv-search-engine"
-				value="https://www.google.com/search?q=%s"
-				type="hidden"
-			/>
-			<input id="uv-address" type="text" placeholder="Search the web freely" />
-		</form>
-		<div class="desc left-margin">
-			<p id="uv-error"></p>
-			<pre id="uv-error-code"></pre>
+		<div class="app-shell left-margin">
+			<div class="tab-row">
+				<button type="button" class="tab-button active" data-tab="browser">Browser</button>
+				<button type="button" class="tab-button" data-tab="settings">Settings</button>
+			</div>
+			<div id="browser-panel" class="panel">
+				<form id="uv-form" class="flex-center form-row">
+					<input
+						id="uv-search-engine"
+						value="https://www.google.com/search?q=%s"
+						type="hidden"
+					/>
+					<input id="uv-address" type="text" placeholder="Search the web freely" />
+					<button type="submit" class="search-btn">Go</button>
+				</form>
+				<div class="desc">
+					<p id="uv-error"></p>
+					<pre id="uv-error-code"></pre>
+				</div>
+				<iframe id="uv-frame" title="Ultraviolet browser" src="" style="display:none"></iframe>
+			</div>
+			<div id="settings-panel" class="panel hidden">
+				<h2>Settings</h2>
+				<div class="setting-item">
+					<label for="confirm-close">Ask before closing tab (GoGuardian stopper)</label>
+					<input type="checkbox" id="confirm-close" />
+				</div>
+				<p class="setting-note">When this is enabled, you'll be prompted before leaving or closing the proxy tab.</p>
+			</div>
 		</div>
 		<footer>
 			<div>
 				<a
 					title="The TitaniumNetwork GitHub organization"
 					href="https://github.com/titaniumnetwork-dev"
-					>TitaniumNetwork</a
+					></a
 				>
 				<a title="The TitaniumNetwork Discord" href="https://discord.gg/unblock"
-					>Discord</a
+					></a
 				>
 				<a
 					title="The TompHTTP GitHub organization"
 					href="https://github.com/tomphttp"
-					>TompHTTP</a
+					></a
 				>
 				<a
 					title="The official deployment repository for Ultraviolet"
 					href="https://github.com/titaniumnetwork-dev/Ultraviolet-App"
-					>GitHub</a
+					></a
 				>
-				<a title="License information" href="credits.html">Credits</a>
+				<a title="License information" href="credits.html"></a>
 			</div>
 			<div>
 				<span>Ultraviolet &copy; TN 2023</span>
 			</div>
 		</footer>
-		<iframe style="display: none" id="uv-frame"></iframe>
 		<script src="register-sw.js"></script>
 		<script src="search.js"></script>
 		<script src="index.js"></script>
